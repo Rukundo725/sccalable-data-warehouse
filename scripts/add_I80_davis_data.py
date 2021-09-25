@@ -15,8 +15,8 @@ def DBConnect(dbName=None):
     -------
 
     """
-    conn = mysql.connect(host='localhost', user='root', password='password',
-                         database=dbName, buffered=True)
+    conn = mysql.connect(host='localhost', user='root', password='root',
+                         database=dbName, port ='3306', buffered=True)
     cur = conn.cursor()
     return conn, cur
 
@@ -449,10 +449,10 @@ if __name__ == "__main__":
     I80_median = pd.read_csv('data/I80_median.csv')
     I80_davis = pd.read_csv('data/I80_davis.csv')
     
-    insert_to_I80_davis_t_table(dbName='I80_davis', df=I80_davis, table_name='I80_davis_t')
+    insert_to_I80_davis_t_table(dbName='I80_davis', df=I80_davis, table_name='davis_table')
     insert_to_richards_table(dbName='I80_davis', df=richards, table_name='richards')
-    insert_to_station_summary_table(dbName='I80_davis', df=station, table_name='station_summary')
-    insert_to_weekday_table(dbName='I80_davis', df=weekday, table_name='weekday')
-    insert_to_I80_stations_table(dbName='I80_davis', df=I80_stations, table_name='I80_stations')
-    insert_to_I80_median_table(dbName='I80_davis', df=I80_median, table_name='I80_median')
+    # insert_to_station_summary_table(dbName='I80_davis', df=station, table_name='station_summary')
+    # insert_to_weekday_table(dbName='I80_davis', df=weekday, table_name='weekday')
+    insert_to_I80_stations_table(dbName='I80_davis', df=I80_stations, table_name='stations_table')
+    insert_to_I80_median_table(dbName='I80_davis', df=I80_median, table_name='median_table')
     
