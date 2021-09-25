@@ -15,7 +15,7 @@ def DBConnect(dbName=None):
     -------
 
     """
-    conn = mysql.connect(host='localhost', user='root', password='G-things',
+    conn = mysql.connect(host='localhost', user='root', password='password',
                          database=dbName, buffered=True)
     cur = conn.cursor()
     return conn, cur
@@ -82,31 +82,6 @@ def createTables(dbName: str) -> None:
 
     return
 
-# def preprocess_df(df: pd.DataFrame) -> pd.DataFrame:
-#     """
-
-#     Parameters
-#     ----------
-#     df :
-#         pd.DataFrame:
-#     df :
-#         pd.DataFrame:
-#     df:pd.DataFrame :
-
-
-#     Returns
-#     -------
-
-#     """
-#     cols_2_drop = ['Unnamed: 0', 'timestamp', 'sentiment', 'possibly_sensitive', 'original_text']
-#     try:
-#         df = df.drop(columns=cols_2_drop, axis=1)
-#         df = df.fillna(0)
-#     except KeyError as e:
-#         print("Error:", e)
-
-#     return df
-
 
 def insert_to_I80_davis_t_table(dbName: str, df: pd.DataFrame, table_name: str) -> None:
     """
@@ -138,7 +113,9 @@ def insert_to_I80_davis_t_table(dbName: str, df: pd.DataFrame, table_name: str) 
     """
     conn, cur = DBConnect(dbName)
 
-    # df = preprocess_df(df)
+    df = df.where((pd.notnull(df)), None)
+    df = df.astype(object).where(pd.notnull(df), None)
+
 
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO {table_name} (timestamp,ID,avg_speed,avg_flow,avg_occ,avg_freeflow_speed,samples_below_100pct_ff,
@@ -193,7 +170,8 @@ def insert_to_richards_table(dbName: str, df: pd.DataFrame, table_name: str) -> 
     """
     conn, cur = DBConnect(dbName)
 
-    # df = preprocess_df(df)
+    df = df.where((pd.notnull(df)), None)
+    df = df.astype(object).where(pd.notnull(df), None)
 
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO {table_name} (timestamp,flow1,occupancy1,flow2,occupancy2,flow3,occupancy3,totalflow,weekday,hour,minute,second)
@@ -241,7 +219,8 @@ def insert_to_station_summary_table(dbName: str, df: pd.DataFrame, table_name: s
 
     conn, cur = DBConnect(dbName)
 
-    # df = preprocess_df(df)
+    df = df.where((pd.notnull(df)), None)
+    df = df.astype(object).where(pd.notnull(df), None)
 
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO {table_name} (ID,flow_99,flow_max,flow_median,flow_total,n_obs)
@@ -289,7 +268,8 @@ def insert_to_weekday_table(dbName: str, df: pd.DataFrame, table_name: str) -> N
     """
     conn, cur = DBConnect(dbName)
 
-    # df = preprocess_df(df)
+    df = df.where((pd.notnull(df)), None)
+    df = df.astype(object).where(pd.notnull(df), None)
 
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO {table_name} (ID,hour,minute,second,Unnamed: 4,totalflow)
@@ -337,7 +317,8 @@ def insert_to_I80_median_table(dbName: str, df: pd.DataFrame, table_name: str) -
     """
     conn, cur = DBConnect(dbName)
 
-    # df = preprocess_df(df)
+    df = df.where((pd.notnull(df)), None)
+    df = df.astype(object).where(pd.notnull(df), None)
 
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO {table_name} (ID,weekday,hour,minute,second,flow1,occupancy1,mph1,flow2,
@@ -387,7 +368,9 @@ def insert_to_I80_stations_table(dbName: str, df: pd.DataFrame, table_name: str)
     """
     conn, cur = DBConnect(dbName)
 
-    # df = preprocess_df(df)
+    
+    df = df.where((pd.notnull(df)), None)
+    df = df.astype(object).where(pd.notnull(df), None)
 
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO {table_name} (ID,Fwy,Dir,District,County,City,State_PM,Abs_PM,Latitude,
@@ -466,10 +449,10 @@ if __name__ == "__main__":
     I80_median = pd.read_csv('data/I80_median.csv')
     I80_davis = pd.read_csv('data/I80_davis.csv')
     
-    # insert_to_I80_davis_t_table(dbName='I80_davis', df=I80_davis, table_name='I80_davis_t')
-    # insert_to_richards_table(dbName='I80_davis', df=richards, table_name='richards')
+    insert_to_I80_davis_t_table(dbName='I80_davis', df=I80_davis, table_name='I80_davis_t')
+    insert_to_richards_table(dbName='I80_davis', df=richards, table_name='richards')
     insert_to_station_summary_table(dbName='I80_davis', df=station, table_name='station_summary')
     insert_to_weekday_table(dbName='I80_davis', df=weekday, table_name='weekday')
     insert_to_I80_stations_table(dbName='I80_davis', df=I80_stations, table_name='I80_stations')
-    # insert_to_I80_median_table(dbName='I80_davis', df=I80_median, table_name='I80_median')
+    insert_to_I80_median_table(dbName='I80_davis', df=I80_median, table_name='I80_median')
     
