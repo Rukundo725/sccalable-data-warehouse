@@ -20,3 +20,32 @@ You can get a local copy up and running follow these simple example steps.
    ```sh
    git clone https://github.com/Rukundo725/sensor_data_warehouse.git
    ```
+# for dbt part!
+
+### Using the  project
+
+Try running the following commands:
+- dbt run
+- dbt test
+
+
+### Resources:
+- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
+- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
+- Join the [chat](http://slack.getdbt.com/) on Slack for live discussions and support
+- Find [dbt events](https://events.getdbt.com) near you
+- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+* [10 Academy](https://www.10academy.org/)
+
+#############################################
+
+
+note::
+
+   This project is under active development.
+
+
+======================================
