@@ -10,14 +10,13 @@ In this challenge we creted a scalable data warehouse tech-stack that will help 
 In Data [ucdavis.edu](https://anson.ucdavis.edu/~clarkf/you)  can find example parquet data, and or sensor data in CSV formats with size ~ 1.5 Gb uncompressed each. 
 
 <!-- GETTING STARTED -->
-## Getting Started
+## Getting Started:
 
 You can get a local copy up and running follow these simple example steps.
 
-### Installation
+### Installation:
 
  Clone the repo
    ```sh
    git clone https://github.com/Rukundo725/sensor_data_warehouse.git
    ```
-   
