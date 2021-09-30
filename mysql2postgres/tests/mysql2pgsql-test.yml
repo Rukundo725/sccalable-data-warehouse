@@ -7,7 +7,7 @@ mysql:
  socket:
  username: root
  password: 
- database: mysql2pgsql
+ database: I80_davis
  compress: false
 destination:
  # if file is given, output goes to file, else postgres
@@ -17,11 +17,11 @@ destination:
   port: 5432
   username: postgres
   password: 
-  database: mysql2pgsql
+  database: I80_davis
 
 # if tables is given, only the listed tables will be converted.  leave empty to convert all tables.
-#only_tables:
-#- table1
+only_tables:
+- stations_table1
 #- table2
 # if exclude_tables is given, exclude the listed tables from the conversion.
 #exclude_tables:
