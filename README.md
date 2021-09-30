@@ -16,10 +16,18 @@ You can get a local copy up and running follow these simple example steps.
 
 ### Installation:
 
- Clone the repo
+ - Clone the repo
    ```sh
    git clone https://github.com/Rukundo725/sensor_data_warehouse.git
+   cd data-warehouse-tech-stack
+   pip install -r requirements.txt
    ```
+- Docker-compose
+  
+  ```sh
+   docker-compose up --build
+   ```
+
 # for dbt part!
 
 ### Using the  project
